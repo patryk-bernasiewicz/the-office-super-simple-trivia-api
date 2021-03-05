@@ -4,6 +4,11 @@ We all love "The Office" and if you don't, you're probably a very bad person.
 
 This super-simple API allows you to fetch a few trivia questions and then check the answers to them.
 
+## Installation
+
+1. Clone the repository
+2. Run `yarn`
+3. There you go, you can start it in prod mode with `yarn start` or in dev mode with `yarn dev`
 ## Routes
 
 ### `GET /questions`
