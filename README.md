@@ -56,6 +56,8 @@ Requires to have the body with following structure:
 
 **Note that the body NEEDS to supply the full question and possible answers along with user's answer.**
 
+It will return a 400 error if an unanswered question is found.
+
 Returns the JSON with following structure:
 
 ```json

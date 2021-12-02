@@ -1,12 +1,13 @@
 const questions = require('./questions.json');
 const express = require('express');
 const cors = require('cors');
+const bodyParser = require('body-parser');
 
 const port = 5000;
 const app = express();
 
-app.use(express.json());
 app.use(cors());
+app.use(bodyParser.json({ type: '*/*' }));
 
 app.get('/', (_, res) => {
   return res.json({ response: 'Hello!' });
@@ -25,7 +26,14 @@ app.get('/questions', (req, res) => {
 });
 
 app.post('/answers', (req, res) => {
-  const { answers } = req.body;
+  const answers = req.body;
+
+  const hasAllAnswers = answers.some((answer) => !'answer' in answer);
+  if (!hasAllAnswers) {
+    return res
+      .json({ message: 'All questions must be answered.' });
+  }
+
   const checkedAnswers = answers
     .map((answer) => {
       const originalQuestion = questions.find((question) => question.question === answer.question);
