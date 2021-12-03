@@ -28,9 +28,10 @@ app.get('/questions', (req, res) => {
 app.post('/answers', (req, res) => {
   const answers = req.body;
 
-  const hasAllAnswers = answers.some((answer) => !'answer' in answer);
+  const hasAllAnswers = answers.every((answer) => 'answer' in answer);
   if (!hasAllAnswers) {
     return res
+      .status(400)
       .json({ message: 'All questions must be answered.' });
   }
 
